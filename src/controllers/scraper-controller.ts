@@ -87,39 +87,7 @@ export class ScraperController {
     }
   }
 
-  /**
-   * Test schema generator with URL
-   */
-  async testSchemaGenerator(req: Request, res: Response): Promise<void> {
-    try {
-      const { url, userInstructions } = req.body
-      
-      if (!url) {
-        res.status(400).json({
-          success: false,
-          error: 'Missing url in request body'
-        })
-        return
-      }
 
-      console.log(`Testing schema generator with URL: ${url}`)
-      const result = await this.scraperService.testSchemaGenerator(url, userInstructions)
-      
-      res.status(200).json({
-        success: true,
-        data: result
-      })
-      
-    } catch (error) {
-      console.error('Schema generator test error:', error)
-      
-      res.status(500).json({
-        success: false,
-        error: 'Schema generator test failed',
-        message: error instanceof Error ? error.message : 'Unknown error occurred'
-      })
-    }
-  }
 
   /**
    * Get API information
@@ -132,7 +100,6 @@ export class ScraperController {
       endpoints: {
         'POST /api/scrape': 'Scrape a webpage and extract structured data (V2)',
         'POST /api/scrape-v1': 'Scrape using V1 schema generator with CSS selectors',
-        'POST /api/test-schema': 'Test schema generator with URL',
         'GET /api/health': 'Health check endpoint',
         'GET /api/info': 'API information'
       },

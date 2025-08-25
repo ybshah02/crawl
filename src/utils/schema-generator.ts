@@ -20,8 +20,6 @@ export class SchemaGeneratorV1 {
     dataHints?: any
   ): Promise<SchemaGenerationResult> {
     try {
-      console.log('🔍 Schema Generator V1: Extracting CSS selectors and navigation patterns...')
-
       const selectorPrompt = this.createCssSelectorPrompt(sourceCode, userInstructions)
       const navigationPrompt = this.createNavigationDetectionPrompt(sourceCode)
       const cssSelectors = await this.extractCssSelectors(selectorPrompt)
@@ -33,7 +31,7 @@ export class SchemaGeneratorV1 {
         schema,
         confidence: 0.8,
         fields,
-        cssSelectors, // Store the actual CSS selectors
+        cssSelectors,
         navigationPatterns
       }
     } catch (error) {
